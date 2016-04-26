@@ -5,7 +5,14 @@ var name = getQueryVariable('name') || 'Guest';
 socket.on('connect', function(){
 	console.log('Connected to socket.io server!');
 	jQuery('.messages').append('<p><strong>' + name + ' joined ' + room + '</strong></p>');
+	socket.emit('joinRoom', {
+		name: name,
+		room: room
+	});
+
 });
+
+jQuery('.room-title').text(room);
 
 socket.on('message', function(message){
 	
